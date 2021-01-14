@@ -15,14 +15,3 @@ const myUsersSchema = new Schema({
 
 const myUsers = mongoose.model("myUsers", myUsersSchema);
 module.exports = myUsers;
-/*
-export const myUsers = mongoose.model("myUsers", myUsersSchema);
-export default { myUsers };
-*/
-/*
-module.exports = {
-  usersModel: function () {
-    const myUsers = mongoose.model("myUsers", myUsersSchema);
-  },
-};
-*/
