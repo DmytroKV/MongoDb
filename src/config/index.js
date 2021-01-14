@@ -30,5 +30,5 @@ app.use("/post-routes", postRoutes);
 app.listen(PORT, console.log(`Server listening at the port ${PORT}`));
 
 //Links:
-//http:localhost:500/get-routes/show  - GET
-//http:localhost:500/post-routes/save - POST
+//http:localhost:5000/get-routes/show  - GET
+//http:localhost:5000/post-routes/save - POST
