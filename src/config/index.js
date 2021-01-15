@@ -1,3 +1,7 @@
+const path = require("path");
+require("dotenv").config({
+  path: path.join("", "", "settings.env"),
+});
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
@@ -8,9 +12,8 @@ const getRoutes = require("../api-routes/get-api");
 //separate router for POST
 const postRoutes = require("../api-routes/post-api");
 
-const PORT = process.env.PORT || 5000;
-const uri =
-  "mongodb+srv://dbUser:qB7viqjbHjkdfa9@cluster0.otyvk.mongodb.net/test";
+const PORT = process.env.MY_PORT;
+const uri = process.env.MONGO_DB;
 
 app.use(morgan("tiny"));
 
@@ -30,5 +33,6 @@ app.use("/post-routes", postRoutes);
 app.listen(PORT, console.log(`Server listening at the port ${PORT}`));
 
 //Links:
+//http:localhost:5000/get-routes/      - GET (main page)
 //http:localhost:5000/get-routes/show  - GET
 //http:localhost:5000/post-routes/save - POST
