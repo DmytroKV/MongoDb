@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
-const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { throws } = require("assert");
 
 const { Schema } = mongoose;
 
@@ -15,18 +13,18 @@ const UsersSchema = new Schema({
 });
 
 UsersSchema.methods.setPassword = function (password) {
-  this.salt = crypto.randomBytes(16).toString("hex");
-  this.hash = crypto
-    .pbkdf2Sync(password, this.salt, 10000, 512, "sha1")
-    .toString("hex");
+  this.salt = bcrypt.genSaltSync(saltRounds);
+  this.hash = bcrypt.hashSync(password, this.salt);
 };
 
 UsersSchema.methods.validatePassword = function (password) {
-  const hash = crypto
-    .pbkdf2Sync(password, this.salt, 10000, 512, "sha1")
-    .toString("hex");
-  return this.hash === hash;
+  if (bcrypt.compareSync(password, this.hash)) {
+    return this.hash;
+  } else {
+    return false;
+  }
 };
+
 UsersSchema.methods.generateRefreshJWT = function () {
   return jwt.sign(
     {
