@@ -67,11 +67,12 @@ router.post("/login", auth.optional, (req, res, next) => {
       if (passportUser) {
         const user = passportUser;
         user.token = passportUser.generateJWT();
+        user.refreshToken = passportUser.generateRefreshJWT();
 
         return res.json({ user: user.toAuthJSON() });
       }
 
-      return status(400).info;
+      return res.sendStatus(400);
     }
   )(req, res, next);
 });
