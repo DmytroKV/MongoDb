@@ -15,6 +15,7 @@ app.use(require("./src/api-routes"));
 const PORT = process.env.MY_PORT;
 const uri = process.env.MONGO_DB;
 
+console.log("Test for smth!");
 app.use(morgan("tiny"));
 
 mongoose.connect(uri, {
